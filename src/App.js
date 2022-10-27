@@ -13,7 +13,6 @@ class App extends Component {
 		turnRobot: 0,
 	};
 
-	
 	formGrid = () => {
 		const xAxis = [1, 2, 3, 4, 5];
 		const yAxis = [5, 4, 3, 2, 1];
@@ -54,78 +53,53 @@ class App extends Component {
 	};
 
 	turnRobotAround = (event) => {
+		const updateState = (direction, degree) => {
+			this.setState({
+				...this.state,
+				robotFace: direction,
+				turnRobot: this.state.turnRobot + degree,
+			});
+		};
 		if (
 			this.state.robotFace === "north" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "west",
-				turnRobot: this.state.turnRobot - 90,
-			});
+			updateState("west", -90);
 		} else if (
 			this.state.robotFace === "west" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "south",
-				turnRobot: this.state.turnRobot - 90,
-			});
+			updateState("south", -90);
 		} else if (
 			this.state.robotFace === "south" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "east",
-				turnRobot: this.state.turnRobot - 90,
-			});
+			updateState("east", -90);
 		} else if (
 			this.state.robotFace === "east" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "north",
-				turnRobot: this.state.turnRobot - 90,
-			});
+			updateState("north", -90);
 		} else if (
 			this.state.robotFace === "north" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "east",
-				turnRobot: this.state.turnRobot + 90,
-			});
+			updateState("east", +90);
 		} else if (
 			this.state.robotFace === "east" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "south",
-				turnRobot: this.state.turnRobot + 90,
-			});
+			updateState("south", +90);
 		} else if (
 			this.state.robotFace === "south" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "west",
-				turnRobot: this.state.turnRobot + 90,
-			});
+			updateState("west", +90);
 		} else if (
 			this.state.robotFace === "west" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			this.setState({
-				...this.state,
-				robotFace: "north",
-				turnRobot: this.state.turnRobot + 90,
-			});
+			updateState("north", +90);
 		}
 	};
 
