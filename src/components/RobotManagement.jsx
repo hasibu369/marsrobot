@@ -1,10 +1,8 @@
-import "./App.css";
 import { Component } from "react";
-import robot from "./robot.png";
-
 import { Container, Row, Col, Badge } from "react-bootstrap";
+import MarsGrid from "./Grid";
 
-class App extends Component {
+class RobotInMars extends Component {
 	state = {
 		xAxis: 1,
 		yAxis: 1,
@@ -12,93 +10,59 @@ class App extends Component {
 		turnRobot: 0,
 	};
 
-	formGrid = () => {
-		const xAxis = [1, 2, 3, 4, 5];
-		const yAxis = [5, 4, 3, 2, 1];
-		const formXAxis = (y) => {
-			return xAxis.map((x) => (
-				<Col
-					key={`${x}, ${y}`}
-					sm="2 p-4 border-1 border border-primary text-center"
-					className="singleCube"
-				>
-					{this.state.xAxis === x && this.state.yAxis === y ? (
-						<img
-							src={robot}
-							alt="robot"
-							style={{
-								height: "100%",
-								width: "100%",
-								transform: `rotate(${this.state.turnRobot}deg)`,
-							}}
-						/>
-					) : (
-						""
-					)}
-				</Col>
-			));
-		};
-		const formYAxis = () => {
-			return yAxis.map((y) => (
-				<Row
-					key={y}
-					className="d-flex justify-content-center align-items-center g-0"
-				>
-					{formXAxis(y)}
-				</Row>
-			));
-		};
-		return formYAxis();
+	updateState = (direction, degree) => {
+		this.setState({
+			...this.state,
+			robotFace: direction,
+			turnRobot: this.state.turnRobot + degree,
+		});
 	};
 
-	turnRobotAround = (event) => {
-		const updateState = (direction, degree) => {
-			this.setState({
-				...this.state,
-				robotFace: direction,
-				turnRobot: this.state.turnRobot + degree,
-			});
-		};
+	turnRobotLeft = (event) => {
 		if (
 			this.state.robotFace === "north" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			updateState("west", -90);
+			this.updateState("west", -90);
 		} else if (
 			this.state.robotFace === "west" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			updateState("south", -90);
+			this.updateState("south", -90);
 		} else if (
 			this.state.robotFace === "south" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			updateState("east", -90);
+			this.updateState("east", -90);
 		} else if (
 			this.state.robotFace === "east" &&
 			(event.key === "l" || event.key === "L" || event.keyCode === 37)
 		) {
-			updateState("north", -90);
-		} else if (
+			this.updateState("north", -90);
+		}
+	};
+
+	turnRobotRight = (event) => {
+		if (
 			this.state.robotFace === "north" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			updateState("east", +90);
+			this.updateState("east", +90);
 		} else if (
 			this.state.robotFace === "east" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			updateState("south", +90);
+			this.updateState("south", +90);
 		} else if (
 			this.state.robotFace === "south" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			updateState("west", +90);
+			this.updateState("west", +90);
 		} else if (
 			this.state.robotFace === "west" &&
 			(event.key === "r" || event.key === "R" || event.keyCode === 39)
 		) {
-			updateState("north", +90);
+			this.updateState("north", +90);
 		}
 	};
 
@@ -131,9 +95,11 @@ class App extends Component {
 			return this.state;
 		}
 	};
+
 	componentDidMount() {
 		window.onkeydown = (event) => {
-			this.turnRobotAround(event);
+			this.turnRobotRight(event);
+			this.turnRobotLeft(event);
 			this.moveRobotForward(event);
 		};
 	}
@@ -150,11 +116,16 @@ class App extends Component {
 						</Badge>
 					</Col>
 				</Row>
-
-				{this.formGrid()}
+				{
+					<MarsGrid
+						currentXAxis={this.state.xAxis}
+						currentYAxis={this.state.yAxis}
+						turnRobot={this.state.turnRobot}
+					/>
+				}
 			</Container>
 		);
 	}
 }
 
-export default App;
+export default RobotInMars;

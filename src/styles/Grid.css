@@ -1,7 +1,4 @@
 
-.turnRobot{
-  transform: rotate(90deg) !important;
-}
 
 .singleCube{
   height: 100px !important;
@@ -9,3 +6,6 @@
   box-sizing: border-box !important;
 }
 
+/* .turnRobot{
+  transform: rotate(90deg) !important;
+} */
