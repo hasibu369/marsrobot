@@ -1,30 +1,14 @@
-# Getting Started with this project
+# About This Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Robot on Mars
+This React application is designed to simulate the navigation of a robotic rover on a rectangular plateau situated on Mars, enabling its on-board cameras to capture a comprehensive view of the surroundings and transmit the images back to Earth.
 
-## Available Scripts
+The application allows users to move the robot on the plateau grid through commands, visualise its movements and final positions. The rover location is represented by a combination of x and y coordinates, with a letter that designates one of the four cardinal compass points.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For example, the rover position might be described as 1, 1, N, signifying its presence at the bottom left corner and facing North. 
+Robot commands are: 
+	“L” or left arrow - 90-degree left rotation 
+	“R” or right arrow - 90-degree right rotation 
+	'F' or up arrow - forward movement by one grid point
+Tech used:
+React, React Bootstrap
